@@ -1,0 +1,86 @@
+@model IEnumerable<EstacionamentoDotnet6.Models.Carro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-white">Lista</h1>
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create" alt="Cadastrar cliente">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+        </svg>
+    </a>
+</p>
+<form asp-controller="Carro" asp-action="Index" method="get">
+    <p class="text-white">
+        <strong>Cliente</strong> <input type="text" name="SearchString" />
+        <input class="btn btn-success" type="submit" value="Procurar" />
+    </p>
+</form>
+<table class="table-responsive">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCarro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Placa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pessoas)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr class="text-danger">
+           
+            <td >
+                @Html.DisplayFor(modelItem => item.NomeCarro)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Modelo)
+            </td>
+             <td >
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+             <td >
+                @Html.DisplayFor(modelItem => item.Placa)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Pessoas)
+            </td>
+        
+            <td>
+                <a class="Icon btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.CarroId">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench" viewBox="0 0 16 16">
+                        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z" />
+                    </svg>
+                </a>
+                <a class=" Icon btn btn-outline-success" asp-action="Details" asp-route-id="@item.CarroId">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                    </svg>
+                </a>
+                <a class=" Icon btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.CarroId">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                </a>
+            </td>
+        </tr>
+    }   
+    </tbody>
+</table>
