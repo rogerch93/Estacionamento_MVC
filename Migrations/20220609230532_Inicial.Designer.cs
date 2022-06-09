@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstacionamentoDotnet6.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220605224832_TesteInicial")]
-    partial class TesteInicial
+    [Migration("20220609230532_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,7 @@ namespace EstacionamentoDotnet6.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PessoasPessoaId")
+                    b.Property<int>("PessoasId")
                         .HasColumnType("int");
 
                     b.Property<string>("Placa")
@@ -53,9 +53,10 @@ namespace EstacionamentoDotnet6.Migrations
 
                     b.HasKey("CarroId");
 
-                    b.HasIndex("PessoasPessoaId");
+                    b.HasIndex("PessoasId")
+                        .IsUnique();
 
-                    b.ToTable("Carro");
+                    b.ToTable("Carros");
                 });
 
             modelBuilder.Entity("EstacionamentoDotnet6.Models.Estadia", b =>
@@ -75,9 +76,12 @@ namespace EstacionamentoDotnet6.Migrations
                     b.Property<int>("NumVaga")
                         .HasColumnType("int");
 
+                    b.Property<int>("PessoaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Estadia");
+                    b.ToTable("Estadias");
                 });
 
             modelBuilder.Entity("EstacionamentoDotnet6.Models.Pagamento", b =>
@@ -91,12 +95,15 @@ namespace EstacionamentoDotnet6.Migrations
                     b.Property<bool>("Pago")
                         .HasColumnType("bit");
 
+                    b.Property<int>("PessoasId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,6)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pagamento");
+                    b.ToTable("Pagamentos");
                 });
 
             modelBuilder.Entity("EstacionamentoDotnet6.Models.Pessoa", b =>
@@ -117,18 +124,24 @@ namespace EstacionamentoDotnet6.Migrations
 
                     b.HasKey("PessoaId");
 
-                    b.ToTable("Pessoa");
+                    b.ToTable("Pessoas");
                 });
 
             modelBuilder.Entity("EstacionamentoDotnet6.Models.Carro", b =>
                 {
                     b.HasOne("EstacionamentoDotnet6.Models.Pessoa", "Pessoas")
-                        .WithMany()
-                        .HasForeignKey("PessoasPessoaId")
+                        .WithOne("Carro")
+                        .HasForeignKey("EstacionamentoDotnet6.Models.Carro", "PessoasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Pessoas");
+                });
+
+            modelBuilder.Entity("EstacionamentoDotnet6.Models.Pessoa", b =>
+                {
+                    b.Navigation("Carro")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

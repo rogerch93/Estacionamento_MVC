@@ -5,41 +5,43 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EstacionamentoDotnet6.Migrations
 {
-    public partial class TesteInicial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Estadia",
+                name: "Estadias",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NumVaga = table.Column<int>(type: "int", nullable: false),
                     HoraEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HoraSaida = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    HoraSaida = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PessoaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Estadia", x => x.Id);
+                    table.PrimaryKey("PK_Estadias", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pagamento",
+                name: "Pagamentos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Pago = table.Column<bool>(type: "bit", nullable: false)
+                    Total = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    Pago = table.Column<bool>(type: "bit", nullable: false),
+                    PessoasId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagamento", x => x.Id);
+                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pessoa",
+                name: "Pessoas",
                 columns: table => new
                 {
                     PessoaId = table.Column<int>(type: "int", nullable: false)
@@ -49,11 +51,11 @@ namespace EstacionamentoDotnet6.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pessoa", x => x.PessoaId);
+                    table.PrimaryKey("PK_Pessoas", x => x.PessoaId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carro",
+                name: "Carros",
                 columns: table => new
                 {
                     CarroId = table.Column<int>(type: "int", nullable: false)
@@ -62,38 +64,39 @@ namespace EstacionamentoDotnet6.Migrations
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Placa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PessoasPessoaId = table.Column<int>(type: "int", nullable: false)
+                    PessoasId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carro", x => x.CarroId);
+                    table.PrimaryKey("PK_Carros", x => x.CarroId);
                     table.ForeignKey(
-                        name: "FK_Carro_Pessoa_PessoasPessoaId",
-                        column: x => x.PessoasPessoaId,
-                        principalTable: "Pessoa",
+                        name: "FK_Carros_Pessoas_PessoasId",
+                        column: x => x.PessoasId,
+                        principalTable: "Pessoas",
                         principalColumn: "PessoaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carro_PessoasPessoaId",
-                table: "Carro",
-                column: "PessoasPessoaId");
+                name: "IX_Carros_PessoasId",
+                table: "Carros",
+                column: "PessoasId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Carro");
+                name: "Carros");
 
             migrationBuilder.DropTable(
-                name: "Estadia");
+                name: "Estadias");
 
             migrationBuilder.DropTable(
-                name: "Pagamento");
+                name: "Pagamentos");
 
             migrationBuilder.DropTable(
-                name: "Pessoa");
+                name: "Pessoas");
         }
     }
 }
