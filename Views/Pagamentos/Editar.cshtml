@@ -1,0 +1,34 @@
+@{
+    ViewData ["Title"] = "Estadia";
+}
+
+@model EstacionamentoDotnet6.Models.Pagamento
+
+<h1 class="text-withe">Editar</h1>
+
+<h4 class="text-black">Pagamentos</h4>
+<hr />
+ <div class="row">
+     <div class="col-md-3">
+         <form action="Pagamento">
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+             <div class="from-group">
+                    <label asp-for="Total" class="control-label">Numero da Vaga</label>
+                    <input asp-for="Total" class="form-control">
+             </div>
+             <div class="form-group">
+                    <label asp-for="Pago" class="control-label">Hora de Entrada</label>
+                    <input asp-for="Pago" class="form-control">
+             </div>
+
+            <div class="form-group">
+                <input id="Cad" type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+         </form>
+
+         <div>
+             <a class="btn btn-outline-primary" asp-action="#">Voltar</a>
+         </div>
+     </div>
+ </div>

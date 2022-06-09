@@ -16,14 +16,14 @@ namespace EstacionamentoDotnet6.Controllers
 
         
         [HttpGet] // GET: Carro
-        public async Task <IActionResult> Index(string searchSting)
+        public async Task <IActionResult> Index(string searchString)
         {
             var carros = from c in _context.Carros
                             select c;
 
-            if(!string.IsNullOrEmpty(searchSting))
+            if(!string.IsNullOrEmpty(searchString))
             {
-                carros = carros.Where(c => c.Placa.Contains(searchSting));
+                carros = carros.Where(c => c.Placa.Contains(searchString));
             }
             return View(carros);
         }

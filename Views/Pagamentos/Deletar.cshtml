@@ -1,0 +1,36 @@
+@model EstacionamentoDotnet6.Models.Pagamento
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-white">Deletar</h1>
+
+<h3 class="text-white">Deseja deletar mesmo este itens da lista ?</h3>
+<div>
+    <h4 class="text-white">Pagamentos</h4>
+    <hr />
+    <dl class="row">
+      
+      
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pago)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pago)
+        </dd>
+        
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Voltar a lista</a>
+    </form>
+</div>
